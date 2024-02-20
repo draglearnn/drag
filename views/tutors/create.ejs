@@ -1,0 +1,42 @@
+<!-- views/tutors/create.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles/style.css">
+  <title>Create Tutor</title>
+</head>
+<body>
+  <% include ('../partials/navigation.ejs') %>
+
+  <div class="create-tutor-form">
+    <h1>Create Tutor</h1>
+    <form action="/tutors/create" method="post" enctype="multipart/form-data">
+      
+      <!-- Name input -->
+      <label for="name">Name:</label>
+      <input type="text" name="name" required>
+      
+      <!-- Subject input -->
+      <label for="subject">Subject:</label>
+      <input type="text" name="subject" required>
+
+      <!-- Image upload input -->
+      <label for="tutorImage">Image:</label>
+      <input type="file" name="tutorImage"> <!-- Make sure the name attribute matches -->
+
+      <!-- Other form fields -->
+      <!-- Add other input fields as needed -->
+
+      <!-- Submit button -->
+      <button type="submit">Create Tutor</button>
+    </form>
+
+    <!-- Back to tutors list link -->
+    <a href="/tutors">Back to Tutors List</a>
+  </div>
+
+  <% include ('../partials/footer.ejs') %>
+</body>
+</html>

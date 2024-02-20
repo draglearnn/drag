@@ -1,0 +1,211 @@
+<!-- views/partials/navigation.ejs -->
+<style>
+  /* styles/style.css */
+
+
+  .navigation {
+    background-color: #4CAF50;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    height: 5vh; /* 10% of the viewport height */
+    margin: 0;
+    border-bottom: 6px solid #0075b0;
+    zoom: 90%;
+  }
+
+  .logo {
+    max-width: 180px;
+    height: auto;
+    z-index: 999;
+  }
+
+  .menu {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .menu a {
+    color: white;
+    text-decoration: none;
+    font-weight: bolder;
+    font-size: 1.2rem;
+  }
+
+  .user-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .user-actions a {
+    color: white;
+    text-decoration: none;
+  }
+
+  .user-actions img {
+    max-height: 30px;
+  }
+
+  .user-actions a[href="/register"] {
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    padding: 8px 16px;
+  }
+
+  .user-actions a[href="/login"] {
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    border: 1.5px solid black;
+    padding: 8px 16px;
+  }
+
+  @media only screen and (max-width: 768px) {
+    .menu,
+    .user-actions {
+      flex-direction: column;
+      align-items: flex-start;
+      display: none;
+    }
+
+    .menu a,
+    .user-actions a {
+      padding: 10px 0;
+    }
+
+    .navigation.active .menu,
+    .navigation.active .user-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  .hamburger-menu {
+    display: none;
+    cursor: pointer;
+  }
+
+  @media only screen and (max-width: 768px) {
+    .hamburger-menu {
+      display: block;
+    }
+
+    .navigation.active .user-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 1rem;
+      z-index: 999;
+      background: #45a049;
+    }
+
+    .navigation.active .menu, .navigation.active .user-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+    background: #4caf50;
+    /* z-index: 999; */
+   
+}
+
+
+.navigation {
+    background-color: #4CAF50;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    height: 30vh; /* 10% of the viewport height */
+    margin: 0;
+  }
+
+  
+  body{
+      zoom: 60%;
+      overflow-x: hidden;
+    }
+    .logo {
+      max-width: 150px;
+    height: auto;
+    z-index: 999;
+  }
+  .navigationi {
+ 
+ /* padding: 20px; */
+ height: 80vh; /* 10% of the viewport height */
+ /* margin: 0; */
+}
+
+.hamburger-menu {
+       /* display: none; */
+       cursor: pointer;
+    font-size: 2rem;
+    position: relative;
+    top: -50px;
+    left: 6px;
+    font-size: 2rem;
+}
+
+.hamburger-menuP {
+       /* display: none; */
+       cursor: pointer;
+    font-size: 2rem;
+    position: relative;
+    top: -160px;
+    left: 6px;
+    font-size: 2rem;
+}
+
+.logo {
+    max-width: 150px;
+    height: auto;
+    position: absolute;
+    top: 0;
+
+}
+  }
+</style>
+
+<script>
+  function toggleMenu() {
+    const navigation = document.querySelector('.navigation');
+    const ham = document.querySelector('.hamburger-menu ')
+    navigation.classList.toggle('active');
+    navigation.classList.toggle('navigationi')
+    ham.classList.toggle('hamburger-menuP')
+    
+  
+  }
+
+ 
+</script>
+
+
+
+<div class="navigation">
+  <a href="/"> <img src="/images/logo.png" alt="Logo" class="logo"> </a>
+  <div class="menu">
+    <a href="/tutors">Tutors</a>
+    <a href="/become-mentor">About</a>
+    <a href="/become-mentor">Become a tutor</a>
+    <a href="/Phonenumber" style="display: flex; align-items: center;"><img src="/images/Phone.png" alt="phone" class="phone" style="margin-right: 5px;max-height: 45px; "> +27 76 365 6099</a>
+  </div>
+  <div class="user-actions">
+    <a href="/shopping-cart"><img src="/images/Chat Message Sent.png" alt="Chat Message Sent.png" class="Chat Message Sent.png"> </a>
+    <a href="/shopping-cart"><img src="/images/unread messages.png" alt="unread messages" class="unread messages"> </a>
+    <a href="/shopping-cart"><img src="/images/Cart.png" alt="Cart" class="Cart"> </a>
+    <% if(!currentUser) { %>
+    <a href="/login">Log in</a>
+    <a href="/register">Sign up</a>
+    <% } else { %>
+    <a href="/logout">Logout</a>
+    <% } %>
+  </div>
+  <div class="hamburger-menu" onclick="toggleMenu()">☰</div>
+</div>

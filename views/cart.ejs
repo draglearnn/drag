@@ -1,0 +1,32 @@
+<!-- views/cart.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart</title>
+</head>
+<body>
+  <%- include ('./partials/navigation.ejs') %>
+  
+  <h1>Your Shopping Cart</h1>
+
+  <% if (cartItems.length > 0) { %>
+    <ul>
+      <% cartItems.forEach(item => { %>
+        <li>
+          <strong><%= item.name %></strong>
+          <p><%= item.price %></p>
+          <!-- Add any other details you want to display -->
+        </li>
+      <% }); %>
+    </ul>
+  <% } else { %>
+    <p>Your cart is empty.</p>
+  <% } %>
+
+  <!-- Additional content or purchase form goes here -->
+
+  <%- include ('./partials/footer.ejs') %>
+</body>
+</html>

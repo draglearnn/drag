@@ -1,0 +1,40 @@
+<!-- views/tutors/edit.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles/style.css">
+  <title>Edit Tutor</title>
+</head>
+<body>
+
+  <%- include ('../partials/navigation.ejs') %>
+
+  <div class="edit-tutor-form">
+    <h1>Edit Tutor</h1>
+    <form action="/tutors/<%= tutor._id %>/edit" method="POST" enctype="multipart/form-data">
+
+      <label for="name">Name:</label>
+      <input type="text" name="name" value="<%= tutor.name %>" required>
+      
+      <label for="subject">Subject:</label>
+      <input type="text" name="subject" value="<%= tutor.subject %>" required>
+
+      <!-- Add file input for updating image -->
+      <label for="tutorImage">Update Image:</label>
+      <input type="file" name="tutorImage" accept="image/*">
+
+      <!-- Display the last image in the array -->
+      <img src="<%= tutor.image && tutor.image.length ? tutor.image[tutor.image.length - 1].url : '/default-image.jpg' %>" alt="Tutor Image">
+
+      <!-- Add other input fields as needed -->
+      <input type="hidden" name="_method" value="PUT">
+      <button type="submit">Update Tutor</button>
+    </form>
+    <a href="/tutors/<%= tutor._id %>">Cancel</a>
+  </div>
+
+  <%- include ('../partials/footer.ejs') %>
+</body>
+</html>

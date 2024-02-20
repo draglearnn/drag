@@ -1,0 +1,106 @@
+<!-- tutors/tutor-details.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutor Details</title>
+
+    <style>
+        body{
+      zoom: 86%;
+        }
+        .container {
+            width: 80%;
+            max-width: 600px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            margin: 20px auto;
+        }
+
+        h1 {
+            color: #45a049;
+        }
+
+        .card-image {
+            margin-top: 20px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            margin-top: 20px;
+            background-color: #45a049;
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #39843f;
+        }
+    </style>
+</head>
+<body>
+
+<%- include ('../partials/navigation.ejs') %>
+
+<div class="container">
+    <h1>Tutor Details</h1>
+    <p>Name: <%= name %></p>
+    <p>Subject: <%= subject %></p>
+    <p>Message: <%= message %></p>
+
+    <!-- Display the tutor image -->
+    <div class="card-image">
+        <img src="<%= tutor.image && tutor.image.length ? tutor.image[tutor.image.length - 1].url : '/default-image.jpg' %>"
+             alt="<%= name %>'s Image">
+    </div>
+
+    <!-- Display submitted by information -->
+    <p>Submitted by: <%= tutor.author.username %></p>
+
+    <!-- Edit Tutor button (if the current user owns the tutor) -->
+    <% if(currentUser && tutor.author.equals(currentUser._id)) { %>
+        <a href="/tutors/<%= tutor._id %>/edit">
+            <button class="btn" type="button">Edit Tutor</button>
+        </a>
+    <% } %>
+
+    <!-- Form for deleting the tutor (if the current user owns the tutor) -->
+    <!-- Update your delete form to use DELETE method -->
+    <% if(currentUser && tutor.author.equals(currentUser._id)) { %>
+        <form action="/tutors/<%= tutor._id %>" method="post">
+            <input type="hidden" name="_method" value="DELETE">
+            <button class="btn" type="submit">Delete Tutor</button>
+        </form>
+    <% } %>
+
+    <!-- Book a Lesson button -->
+    <a href="/apply-lesson/<%= tutorId %>">
+        <button class="btn" type="button">Book a Lesson</button>
+    </a>
+</div>
+
+<%- include ('../partials/footer.ejs') %>
+
+</body>
+</html>

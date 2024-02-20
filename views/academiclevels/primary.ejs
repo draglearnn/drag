@@ -1,0 +1,27 @@
+<!-- views/primary.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles/style.css">
+  <title><%= pageTitle %></title>
+</head>
+<body>
+
+  <%- include ('../partials/navigation.ejs') %>
+  
+  <div class="academic-content">
+    <h1><%= pageTitle %></h1>
+    <p>Welcome to the Primary level information.</p>
+      <ul>
+        <li>Read</li>
+        <li>Count</li>
+        <li>Write</li>
+      </ul>
+    <!-- Add specific content for the Primary level as needed -->
+  </div>
+
+  <%- include ('../partials/footer.ejs') %>
+</body>
+</html>

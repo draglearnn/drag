@@ -1,0 +1,221 @@
+<!-- views/main.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <link rel="stylesheet" href="/styles/style.css"> -->
+  <title><%= pageTitle %></title>
+  <style>
+  body{
+      zoom: 70%;
+      overflow-x: hidden;
+      /* background-color: #0075b0; */
+    }
+    .slider {
+      overflow: hidden;
+      width: 100%;
+      position: relative; /* Make it relative to position circles */
+    }
+
+    .slide-wrapper {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .slide {
+      flex: 0 0 100%;
+    }
+
+    .slide img {
+      height: 500px;
+      width: 100%;
+      object-fit: cover;
+      border-bottom: 10px solid #45a049;
+    }
+
+    /* Optional: Add styles for navigation buttons */
+    .prev, .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 24px;
+      color: white;
+      background-color: black;
+      border: none;
+    }
+
+    /* Styling for circles */
+    .circle-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap; /* Allow circles to wrap to the next line */
+      margin-top: 20px;
+      margin-left: 15rem;
+      top: 380px;
+      position: absolute;
+      right: 2; /* Align to the right side */
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for the container */
+    }
+
+    .circle {
+      width: 240.33px;
+      height: 240.33px;
+      background-color: #45a049;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: rgb(0, 0, 0);
+      font-size: 16px;
+      margin: 10px; /* Add margin for spacing between circles */
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for circles */
+    }
+    .circle-container a{
+      color: black;
+      text-decoration: none;
+    }
+    .one {
+      margin-top: -10rem;
+    }
+    .three {
+      margin-top: -8rem;
+    }
+  </style>
+</head>
+<body>
+  <%- include ('./partials/navigation.ejs') %>
+
+  <div class="main-content">
+    <div id="slideshow-container" class="slider">
+      <!-- Slides -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <img src="images/one.png" alt="" class="slider-image">
+        </div>
+        <div class="slide">
+          <img src="images/two.png" alt="" class="slider-image">
+        </div>
+        <div class="slide">
+          <img src="images/three.png" alt="" class="slider-image">
+        </div>
+      </div>
+
+      <!-- Optional: Add navigation buttons -->
+      <button class="prev" onclick="prevSlide()">❮</button>
+      <button class="next" onclick="nextSlide()">❯</button>
+    </div>
+
+    <!-- Circles -->
+    <div class="circle-container">
+      <h1 style="text-align: center; width: 100%; font-size: 5rem;">Kids are learning</h1>
+      <div class="circle one">
+        <a href="#">
+        <h3>Reading</h3>
+        <img src="images/Teacher.png" alt="Icon 1">
+        </a>
+      </div>
+      <div class="circle two">
+        <a href="#">
+        <h3>Writing</h3>
+        <img src="images/Book And Pencil.png" alt="Icon 2">
+        </a>
+      </div>
+      <div class="circle three">
+        <a href="#">
+        <h3>Coding</h3>
+        <img src="images/Teachero.png" alt="Icon 3">
+      </a>
+      </div>
+      <div class="circle four">
+        <a href="#">
+        <h3>Listening</h3>
+        <img src="images/Teacherpo.png" alt="Icon 4">
+      </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Include links for each academic level -->
+  <!-- <ul>
+    <li><a href="/academiclevels/primary">Primary</a></li>
+    <li><a href="/academiclevels/highschool">High School</a></li>
+    <li><a href="/academiclevels/university">University</a></li>
+  </ul> -->
+
+  <div>
+
+<!-- views/partials/small-cards.ejs -->
+<div class="small-cards-container" style="background-color: #ffffff; padding: 10px;">
+  <h4 style="color: rgb(0, 0, 0); margin-left: 2rem;">Tutors Who Are Ready to Help You</h4>
+  <div class="small-cards" style="display: flex; flex-direction: column;">
+    <% tutors.slice(0, 4).forEach(tutor => { %>
+      <div class="small-card" style="width: 303px; height: 71px; background-color: #45a049; border-radius: 8px; overflow: hidden; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; padding: 0 10px;">
+        <div style="display: flex; align-items: center;">
+          <img src="<%= tutor.image && tutor.image.length ? tutor.image[0].url : 'https://res.cloudinary.com/YOUR_CLOUD_NAME/image/upload/v1637100280/default-image.jpg' %>" alt="Tutor Image" style="width: 48.87px; height: 39.15px; object-fit: cover; border-radius: 50%; margin-right: 10px;">
+          <p style="text-align: center; margin-top: 5px;"><%= tutor.name %></p>
+        </div>
+        <button style="background-color: white; color: black; font-weight: bold; padding: 5px 10px; border: none; cursor: pointer;">View</button>
+      </div>
+    <% }); %>
+  </div>
+</div>
+
+
+
+
+
+  <%- include ('./partials/footer.ejs') %>
+
+  <!-- Optional: Add script for slide navigation and automatic sliding -->
+  <script>
+    let currentSlide = 0;
+    let autoSlideInterval;
+
+    function showSlide(index) {
+      const slideWrapper = document.querySelector('.slide-wrapper');
+      const slides = document.querySelectorAll('.slide');
+      currentSlide = (index + slides.length) % slides.length;
+      slideWrapper.style.transform = `translateX(${-currentSlide * 100}%)`;
+    }
+
+    function prevSlide() {
+      showSlide(currentSlide - 1);
+    }
+
+    function nextSlide() {
+      showSlide(currentSlide + 1);
+    }
+
+    function startAutoSlide() {
+      autoSlideInterval = setInterval(() => {
+        nextSlide();
+      }, 5000);
+    }
+
+    function stopAutoSlide() {
+      clearInterval(autoSlideInterval);
+    }
+
+    // Start automatic sliding when the page loads
+    window.onload = function () {
+      startAutoSlide();
+    };
+
+    // Stop automatic sliding when the user interacts with navigation buttons
+    document.querySelector('.prev').addEventListener('click', function () {
+      stopAutoSlide();
+      prevSlide();
+    });
+
+    document.querySelector('.next').addEventListener('click', function () {
+      stopAutoSlide();
+      nextSlide();
+    });
+  </script>
+
+</body>
+</html>

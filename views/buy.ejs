@@ -1,0 +1,25 @@
+<!-- views/buy.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buy This Course</title>
+</head>
+<body>
+  <%- include ('./partials/navigation.ejs') %>
+  
+  <h1>Buy This Course</h1>
+  <p>You are about to purchase the course with ID: <%= tutorId %></p>
+
+  <!-- Form to add the tutor to the shopping cart -->
+  <form method="POST" action="/cart/add">
+    <input type="hidden" name="tutorId" value="<%= tutorId %>">
+    <button type="submit">Add to Cart</button>
+  </form>
+
+  <!-- Additional content or purchase form goes here -->
+
+  <%- include ('./partials/footer.ejs') %>
+</body>
+</html>
