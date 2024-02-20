@@ -27,8 +27,7 @@ app.set('view engine', 'ejs');
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+
 });
 
 app.use(session({
