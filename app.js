@@ -26,9 +26,11 @@ app.use(bodyParser.json());
 app.set('view engine', 'ejs');
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI, {
+mongoose.connect('mongodb+srv://websiteclient:K8K1iBAOzjSMnnIl@cluster0.f7diq.mongodb.net/', {
 
 });
+
+
 
 app.use(session({
   secret: process.env.SESSION_SECRET,
